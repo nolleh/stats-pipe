@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable } from '@nestjs/common';
 import axios from 'axios';
 import { Request } from 'express';
 // axios.interceptors.request.use(request => {
@@ -10,6 +10,9 @@ import { Request } from 'express';
 //   console.log('Response:', JSON.stringify(response, null, 2))
 //   return response
 // });
+
+const WHITE_LISTS=['nolleh'];
+
 @Injectable()
 export class AppService {
   getHello(): string {
@@ -17,6 +20,9 @@ export class AppService {
   }
 
   async getStats(req: Request) {
+    if (!WHITE_LISTS.includes(req.query.username as string)) {
+      throw new BadRequestException();
+    }
     const response = await axios.get(process.env.HOST + '/api', {
       headers: {
         Authorization: `Bearer ${process.env.API_KEY}`,
@@ -29,6 +35,9 @@ export class AppService {
   }
 
   async getTopLangs(req: Request) {
+    if (!WHITE_LISTS.includes(req.query.username as string)) {
+      throw new BadRequestException();
+    }
     const response = await axios.get(process.env.HOST + '/api/top-langs/', {
       headers: {
         Authorization: `Bearer ${process.env.API_KEY}`,
