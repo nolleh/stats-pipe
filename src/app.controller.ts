@@ -22,5 +22,4 @@ export class AppController {
   async getTopLangs(@Req() req: Request) {
     return await this.appService.getTopLangs(req);
   }
-
 }

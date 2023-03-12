@@ -11,7 +11,7 @@ import { Request } from 'express';
 //   return response
 // });
 
-const WHITE_LISTS=['nolleh'];
+const WHITE_LISTS = ['nolleh'];
 
 @Injectable()
 export class AppService {
@@ -26,7 +26,7 @@ export class AppService {
     const response = await axios.get(process.env.HOST + '/api', {
       headers: {
         Authorization: `Bearer ${process.env.API_KEY}`,
-        "Content-Type": "image/svg+xml",
+        'Content-Type': 'image/svg+xml',
       },
       params: req.query,
     });
@@ -41,7 +41,7 @@ export class AppService {
     const response = await axios.get(process.env.HOST + '/api/top-langs/', {
       headers: {
         Authorization: `Bearer ${process.env.API_KEY}`,
-        "Content-Type": "image/svg+xml",
+        'Content-Type': 'image/svg+xml',
       },
       params: req.query,
     });
